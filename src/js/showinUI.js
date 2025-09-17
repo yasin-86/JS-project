@@ -1,8 +1,17 @@
+import { Add } from "./addTocart.js";
+
 export function showinUI(list, container) {
+  container.addEventListener("click", (e) => {
+    if (e.target.closest(".cart")) {
+      const closestId = e.target.closest(".cart").closest("[id]");
+      const productid = closestId.id;
+      Add(productid, list);
+    }
+  });
+
   container.innerHTML = "";
 
   list.forEach((product) => {
-
     const card = document.createElement("div");
     card.classList.add(
       "w-3/10",
@@ -11,6 +20,7 @@ export function showinUI(list, container) {
       "border-[#D9D9D9]",
       "rounded-[2px]"
     );
+    card.setAttribute("id", product.id);
     card.innerHTML = `              
     <div
                 class="w-full bg-cover h-97 bg-center" style="background-image: url('${product.image}');"
@@ -27,6 +37,7 @@ export function showinUI(list, container) {
                   <h4>${product.description}</h4>
                   <span>${product.price}</span>
                 </div>
+                <button class="w-32 h-9 self-center rounded-2xl border  cart">Add to cart</button>
               </div>
     `;
     container.appendChild(card);
