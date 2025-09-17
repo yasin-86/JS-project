@@ -6,11 +6,17 @@ import { showinUI } from "./showinUI.js";
 const products = document.querySelector(".products");
 const filterProducts = document.querySelectorAll(".filterProducts");
 const searchInput = document.querySelector(".searchInput");
+const shop = document.querySelector(".shop");
 export const card = [];
 
+export function updateCartCount() {
+  shop.textContent = card.length;
+}
 
 const data = await getProducts();
 showinUI(data, products);
+
+updateCartCount();
 
 filterProducts.forEach((item) => {
   item.addEventListener("click", (e) => {
@@ -30,3 +36,6 @@ searchInput.addEventListener("input", (e) => {
   const searchfilter = searchProduct(data, e.target.value);
   showinUI(searchfilter, products);
 });
+
+
+

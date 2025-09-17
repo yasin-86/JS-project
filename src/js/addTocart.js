@@ -1,4 +1,5 @@
 import { card } from "./app.js";
+import { updateCartCount } from "./app.js";
 
 export function Add(id, list) {
   const idinfo = list.filter((item) => item.id == id)[0];
@@ -6,4 +7,6 @@ export function Add(id, list) {
   console.log(idinfo);
 
   card.push(idinfo);
+
+  updateCartCount();
 }
